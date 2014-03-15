@@ -17,7 +17,7 @@ showProposal = (json) ->
 
 connectWebSocket = () ->
   websocket = new WebSocket $("#ws-url").val()
-  websocket.onmessage = (evt) ->
+  websocket.onmessage = (evt) -> 
      json = JSON.parse(evt.data)
      showNewProposal json if json.messageType is "newProposal"
      showProposal json if json.messageType is "proposalSubmission"

@@ -1,14 +1,22 @@
-@(message: String)
+@(keynote: Proposal)
 
 @import helper._
 
-@main("PlayConf 2014") {
+@moreScripts = {
+
+<script src="@routes.Assets.at("javascripts/playconf.js")" 
+  type="text/javascript" charset="utf-8"></script>
+
+}
+
+@main("PlayConf 2014", moreScripts) {
    @if(flash().containsKey("message")) {     
       <section>         
         <h4 style="color: rgb(124, 178, 50);" id="message">@flash.get("message")
         </h4>     
       </section> 
-    }  
+    }
+    <input  type="hidden" id="ws-url" value="@routes.Application.buzz().webSocketURL(request)"/>  
     <section id="speakers" class="clear">
       <header>
         <h1>Speakers</h1>
@@ -20,10 +28,10 @@
         <ul>
           <li>
             <img id="speakerImage" src="assets/images/fake-speaker.png">
-            <h2 id="speakerName">John Doe</h2>
-            <a id="twitterId" href="#" class="twitter">twitter id</a>
-            <h3 id="title">Keynote - keynote title</h3>
-            <p id="proposal">keynote proposal goes in here</p>
+            <h2 id="speakerName">@keynote.speaker.name</h2>
+            <a id="twitterId" href="#" class="twitter">@keynote.speaker.twitterId</a>
+            <h3 id="title">@keynote.title</h3>
+            <p id="proposal">@keynote.proposal</p>
           </li>
         </ul>
       </article>
